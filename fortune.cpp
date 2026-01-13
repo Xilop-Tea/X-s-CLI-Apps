@@ -1,12 +1,5 @@
 #include <iostream>
 
-void setColor(int textColor) {
-    std::cout << "\033[" << textColor << "m";
-}
-
-void resetColor() { 
-    std::cout << "\033[0m"; 
-}
 
 int main() {
 	srand(time(NULL));
@@ -21,7 +14,7 @@ int main() {
 
 
 
-	std::string fortunes[23] = {
+	std::string fortunes[30] = {
 		//Worst Fortunes
 		"You will have 10 years bad luck, I saw that mirror you smashed",
 		"You will be cursed to use bing as your seach engine for the rest of your life",
@@ -43,10 +36,17 @@ int main() {
 		"The early bird gets the worm, but the second mouse gets the cheese",
 		"An alien of some sort will be appearing to you shortly",
 		"When marriage outlawed, only outlaws have in-laws",
+		"Ignore the previous cookie",
+		"Yesterday is history, tomorrow is a mystery, but today is a gift. That is why it is called the present",
+		"A beginning is the time for taking the most delicate care that the balances are correct",
+		"Fear is the mind killer",
+		"You are the architect of your own imprisonment",
 		//Good Fortunes
 		"You will find somthing you once thought was lost to you",
 		"An important person will offer you support in your endeavors",
 		"A beautiful, smart, and loving person will be coming into your life",
+		"Borrow money from a pessimist. They don't expect it back",
+		"Soon, you will receive pleasant news",
 		//Best Fortunes
 		"All your dreams and aspirations will come true in the best way possible",
 		"You will see the end of a rainbow and be able to get your gold"
@@ -57,8 +57,25 @@ int main() {
 	int get_fortune = rand() % (sizeof(fortunes) / sizeof(fortunes[0]));
 
 	std::cout << title << "\n \n";
-	std::cout << fortunes[get_fortune] << "\n";
 
+
+	
+	std::cout << " ";
+	for(int i = fortunes[get_fortune].length() + 1; i >= 0; i--){
+		std::cout << "_";
+	}
+	std::cout << " \n";
+	std::cout << "{";
+	for(int i = fortunes[get_fortune].length() + 1; i >= 0; i--){
+		std::cout << " ";
+	}
+	std::cout << "} \n";
+	std::cout << "{ " << fortunes[get_fortune] << " }" << "\n";
+	std::cout << "{";
+	for(int i = fortunes[get_fortune].length() + 1; i >= 0; i--){
+		std::cout << "_";
+	}
+	std::cout << "} \n \n \n";
 	
 	return 0;
 }
