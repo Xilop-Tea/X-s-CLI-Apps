@@ -1,5 +1,12 @@
 #include <iostream>
 
+void setColor(int textColor) {
+    std::cout << "\033[" << textColor << "m";
+}
+
+void resetColor() { 
+    std::cout << "\033[0m"; 
+}
 
 int main() {
 	srand(time(NULL));
@@ -14,7 +21,7 @@ int main() {
 
 
 
-	std::string fortunes[] = {
+	std::string fortunes[23] = {
 		//Worst Fortunes
 		"You will have 10 years bad luck, I saw that mirror you smashed",
 		"You will be cursed to use bing as your seach engine for the rest of your life",
@@ -41,8 +48,11 @@ int main() {
 		"An important person will offer you support in your endeavors",
 		"A beautiful, smart, and loving person will be coming into your life",
 		//Best Fortunes
-		"All your dreams and aspirations will come true in the best way possible"
+		"All your dreams and aspirations will come true in the best way possible",
+		"You will see the end of a rainbow and be able to get your gold"
 	};
+
+	
 
 	int get_fortune = rand() % (sizeof(fortunes) / sizeof(fortunes[0]));
 
