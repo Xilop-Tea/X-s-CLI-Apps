@@ -3,6 +3,7 @@
 class horse {
     public:
         int speed;
+        int race_speed;
         int payback;
         std::string name;
 
@@ -18,7 +19,7 @@ int main (){
     srand(time(NULL));
     int money = 1000;
 
-    horse stable[10] = {
+    horse stable[13] = {
         horse(10, "Blue Lightning"),
         horse(2, "Old Chompa"),
         horse(1, "Tilly Two Legs"),
@@ -28,11 +29,14 @@ int main (){
         horse(3, "Sleepy Ripply"),
         horse(7, "Green River"),
         horse(9, "Mist Runner"),
-        horse(4, "Show Runner")
+        horse(4, "Show Runner"),
+        horse(5, "Jelly"),
+        horse(4, "Mylyn the Posh and Clean"),
+        horse(6, "Polly Volly")
     };
     horse track[5];
 
-    // Main game loop
+    // Main game loop ADD WHIL LOOP WITH USING MONEY
 
     //Get the horses that will be racing this game
     for (int i = 0; i < 5; i++){
@@ -46,9 +50,27 @@ int main (){
         
     }
 
-    for (int i = 0; i < 5; i++){std::cout << i+1 << ". " << track[i].name << "\n";}
+    for (int i = 0; i < 5; i++){
+        std::cout << i+1 << ". " << track[i].name << "\n";
+    }
     
-    
+    //Get Winner
+    horse winner;
+
+    //Sets how fast the horse ran that race
+    for (int i = 0; i < 5; i++){
+        track[i].race_speed = (rand() % track[i].speed) + 1;
+    }
+    //Sets winner based on highest race speed
+    for (int i = 0; i < 5; i++){
+        if (track[i].race_speed > winner.race_speed){
+            winner = track[i];
+        }
+    }
+
+    for (int i = 0; i < 5; i++){std::cout << track[i].race_speed;}
+    std::cout << winner.name;
+
     
     
 
