@@ -33,15 +33,22 @@ int main (){
     horse track[5];
 
     // Main game loop
-    while (money > 0){
-        //Get the horses that will be racing this game
-        
-        for (int i = 5; i <=0; i--){
-            track[i] = stable[rand() % (sizeof(stable) / sizeof(stable[0]))]; // Needs to check if already in array
+
+    //Get the horses that will be racing this game
+    for (int i = 0; i < 5; i++){
+        horse to_race = stable[rand()%(sizeof(stable) / sizeof(stable[0]))];
+
+        if (to_race.name == track[0].name || to_race.name == track[1].name || to_race.name == track[2].name || to_race.name == track[3].name || to_race.name == track[4].name){
+            i --;
+        } else {
+            track[i] = to_race;
         }
-
-
+        
     }
+
+    for (int i = 0; i < 5; i++){std::cout << i+1 << ". " << track[i].name << "\n";}
+    
+    
     
     
 
