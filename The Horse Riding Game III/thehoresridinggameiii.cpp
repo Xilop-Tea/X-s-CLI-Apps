@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 class horse {
     public:
@@ -23,6 +25,19 @@ class horse {
 
 void thrg3(){
     std::cout << "\nThe Horse Riding Game III\n";
+}
+
+void eraseLines(int count) {
+    if (count > 0) {
+        std::cout << "\x1b[2K"; // Delete current line
+        // i=1 because we included the first line
+        for (int i = 1; i < count; i++) {
+            std::cout
+            << "\x1b[1A" // Move cursor up one
+            << "\x1b[2K"; // Delete the entire line
+        }
+        std::cout << "\r"; // Resume the cursor at beginning of line
+    }
 }
 
 int main (){
@@ -60,9 +75,37 @@ int main (){
                                                             /$$$$$$ /$$$$$$ /$$$$$$                                                 
                                                             |______/|______/|______/            
     )";
+    std::string race_f1 = R"(
+         ,
+        /,`\
+        ` | \____\\
+        _(      ) \
+        \-\~~~_|\  \
+            \ `   \  `
+        `     `
+    )";
+
+    std::string race_f2 = R"(
+        ((^--__
+        | /\  --___ __
+            (  /  \  ) \\
+            / |~~~~/  \  \\
+          /    \ /      \
+    )";
+
+    std::string race_f3 = R"(
+            ,~~_
+            |/\ =_ _ ~
+            _( )_( )\~~
+            \,\  _|\ \~~~
+                \`   \
+                `    `
+    )";
+
+    
     int money = 1000;
 
-    horse stable[13] = {
+    horse stable[14] = {
         horse(10, "Blue Lightning"),
         horse(2, "Old Chompa"),
         horse(1, "Tilly Two Legs"),
@@ -75,7 +118,8 @@ int main (){
         horse(4, "Show Runner"),
         horse(5, "Jelly"),
         horse(4, "Mylyn the Posh and Clean"),
-        horse(6, "Polly Volly")
+        horse(6, "Polly Volly"),
+        horse(5, "Baby Trotter")
     };
     horse track[5];
 
@@ -83,6 +127,7 @@ int main (){
 
     // Main game loop ADD WHIL LOOP WITH USING MONEY
     while (money > 0) {
+        std::cout << "\nYour current balance is: $" << money << "\n";
         //Get the horses that will be racing this game
         for (int i = 0; i < 5; i++){
             horse to_race = stable[rand()%(sizeof(stable) / sizeof(stable[0]))];
@@ -93,6 +138,7 @@ int main (){
                 track[i] = to_race;
             }   
         }
+        std::cout << "This race has these horses racing: \n";
         for (int i = 0; i < 5; i++){
             std::cout << i+1 << ". " << track[i].name << "\n";
         }
@@ -117,7 +163,6 @@ int main (){
         //Sets how fast the horse ran that race (race_speed)
         for (int i = 0; i < 5; i++){
             track[i].race_speed = (rand() % track[i].speed) + 1;
-            std::cout << track[i].race_speed << "\n";
         }
         horse deadHorse(0, "Dead", 0);
         winner = deadHorse; // To have a default horse that can not winn as default was winning some times;
@@ -127,6 +172,19 @@ int main (){
                 winner = track[i];
             }
         }
+
+        // Draw the Race
+        std::cout << race_f1 << "CLOMP*" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        eraseLines(9);
+        std::cout << race_f2 << "CLOMP* CLOMP*" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        eraseLines(7);
+        std::cout << race_f3 << "CLOMP* CLOMP* CLOMP* \n\n" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+
+
+
         std::cout << "The winner is " << winner.name << "\n";
         
         //Get or lose money based on results
@@ -138,16 +196,10 @@ int main (){
             std::cout << "Better luck next time boyo";
             thrg3();
             money -= bet;
-        }
-
-
-        std::cout << money;
-    
+        } 
     }
     std::cout << "Looks like you are out of money \nTime to hit the streets boyo";
     thrg3();
-    
-    
 
     return 0;   
 }
