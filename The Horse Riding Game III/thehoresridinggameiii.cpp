@@ -83,6 +83,7 @@ int main (){
         \-\~~~_|\  \
             \ `   \  `
         `     `
+        CLOMP*
     )";
 
     std::string race_f2 = R"(
@@ -91,6 +92,9 @@ int main (){
             (  /  \  ) \\
             / |~~~~/  \  \\
           /    \ /      \
+
+
+        CLOMP* CLOMP*
     )";
 
     std::string race_f3 = R"(
@@ -100,9 +104,11 @@ int main (){
             \,\  _|\ \~~~
                 \`   \
                 `    `
+
+        CLOMP* CLOMP* CLOMP*
     )";
 
-    
+    int score = 0;
     int money = 1000;
 
     horse stable[14] = {
@@ -174,31 +180,37 @@ int main (){
         }
 
         // Draw the Race
-        std::cout << race_f1 << "CLOMP*" << std::flush;
+        std::cout << race_f1 << std::flush;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         eraseLines(9);
-        std::cout << race_f2 << "CLOMP* CLOMP*" << std::flush;
+        std::cout << race_f2 << std::flush;
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        eraseLines(7);
-        std::cout << race_f3 << "CLOMP* CLOMP* CLOMP* \n\n" << std::flush;
+        eraseLines(9);
+        std::cout << race_f3 << std::flush;
         std::this_thread::sleep_for(std::chrono::seconds(1));
 
 
 
-        std::cout << "The winner is " << winner.name << "\n";
+        std::cout << "\n\nThe winner is " << winner.name << "\n";
         
         //Get or lose money based on results
         if (bet_horse.name == winner.name) {
             std::cout << "Congrats you win";
             thrg3();
             money += bet * winner.payback;
+            score += (bet * winner.payback) * 10;
         } else {
             std::cout << "Better luck next time boyo";
             thrg3();
             money -= bet;
         } 
+
+        score += bet * 10;
     }
+
     std::cout << "Looks like you are out of money \nTime to hit the streets boyo";
+    thrg3();
+    std::cout << "\n\n Your score was: " << score;
     thrg3();
 
     return 0;   
