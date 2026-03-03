@@ -57,6 +57,15 @@ func mm2in(f float64) {
 	fmt.Println(f * 0.03937008)
 }
 
+// Temp
+func f2c(f float64) {
+	fmt.Println((f - 32) * 5 / 9)
+}
+
+func c2f(f float64) {
+	fmt.Println((f * 1.8) + 32)
+}
+
 func main() {
 	var helpText string = `Valid Converts:
 	lb2kg	kg2lb
@@ -64,10 +73,14 @@ func main() {
 	mi2km	km2mi
 	ft2m	m2ft
 	in2cm	cm2in
-	in2mm	mm2in`
-	conType := os.Args[1]
-	var conNum string //Number is string beacuse inputs are strings, needs to be converted to float
+	in2mm	mm2in
+	f2c		c2f`
 
+	var conType string
+	if len(os.Args) > 1 {
+		conType = os.Args[1]
+	}
+	var conNum string //Number is string beacuse inputs are strings, needs to be converted to float
 	if len(os.Args) > 2 {
 		conNum = os.Args[2]
 	} else {
@@ -101,8 +114,13 @@ func main() {
 		ft2m(conNumf)
 	} else if strings.Compare(conType, "mm2in") == 0 {
 		mm2in(conNumf)
+	} else if strings.Compare(conType, "f2c") == 0 {
+		f2c(conNumf)
+	} else if strings.Compare(conType, "c2f") == 0 {
+		c2f(conNumf)
 	} else if strings.Compare(conType, "help") == 0 {
 		fmt.Println(helpText)
+		fmt.Println("Follow this by the number you want to convert")
 	} else {
 		fmt.Println("Invalid Convert. Type unicon help to see all valid converts")
 	}
