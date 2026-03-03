@@ -74,7 +74,7 @@ func main() {
 	ft2m	m2ft
 	in2cm	cm2in
 	in2mm	mm2in
-	f2c		c2f`
+	f2c	c2f`
 
 	var conType string
 	if len(os.Args) > 1 {
